@@ -1,0 +1,25 @@
+<p>register-user works!</p>
+
+    <p>Register User</p>
+    <label>Username:</label>
+    <br>
+    <input type="text" id="usermame" [(ngModel)]='username'>
+    <br>
+    <label>Email:</label>
+    <br>
+    <input type="text" id="email" [(ngModel)]='email'>
+    <br>
+    <label>Phone Number:</label>
+    <br>
+    <input type="text" id="phoneNumber" [(ngModel)]='phoneNumber'>
+    <br>
+    <label>Password:</label>
+    <br>
+    <input type="text" id="password" [(ngModel)]='password'>
+    <br>
+    <label>Confirm Password:</label>
+    <br>
+    <input type="text" id="confirmPassword" [(ngModel)]='confirmPassword'>
+    <br>
+    <button type="button" (click)="OnClickSubmit()" >Submit</button>
+    
