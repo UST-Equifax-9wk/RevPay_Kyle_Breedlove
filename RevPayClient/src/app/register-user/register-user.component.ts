@@ -10,16 +10,22 @@ import { CurrentUserService } from '../current-user.service';
   styleUrl: './register-user.component.css'
 })
 export class RegisterUserComponent {
-  username = ""
-  email = ""
-  phoneNumber= ""
-  password= ""
-  confirmPassword= ""
+  username: string;
+  email: string;
+  phoneNumber: string;
+  password: string;
+  confirmPassword: string;
   httpClient:HttpClient;
   currentUser:CurrentUserService;
   constructor(httpClient:HttpClient, currentUser:CurrentUserService){
+    console.log("register user component")
     this.httpClient=httpClient;
     this.currentUser=currentUser;
+    this.username = currentUser.getUsername();
+    this.email = "";
+    this.phoneNumber = "";
+    this.password = "";
+    this.confirmPassword = "";
   }
   
   OnClickSubmit(){

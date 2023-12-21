@@ -18,7 +18,7 @@ export class CurrentUserService {
 
   setUsername(username:string){
     this.username=username;
-    console.log("set username in service");
+    console.log("username: [" + username + " | " + this.username + "] in service");
   }
 
 }
