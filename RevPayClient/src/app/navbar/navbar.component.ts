@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { ShowTransactionsComponent } from '../show-transactions/show-transactions.component';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [ShowTransactionsComponent, RouterOutlet],
+  imports: [ShowTransactionsComponent, RouterOutlet, RouterModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })

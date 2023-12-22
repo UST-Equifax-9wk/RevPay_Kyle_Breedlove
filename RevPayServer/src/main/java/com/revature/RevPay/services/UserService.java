@@ -29,7 +29,7 @@ public class UserService {
         return userRepository.getByUsername(username);
 
     }
-
+    //TODO make phone number unique
     public User getUserByEmail(String email){
         return userRepository.getByEmail(email);
     }

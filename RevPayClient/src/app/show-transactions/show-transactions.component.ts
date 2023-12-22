@@ -15,8 +15,8 @@ export class ShowTransactionsComponent {
   }
   currentUser: CurrentUserService;
   username:string;
-  ngDoCheck(){
-    this.username=this.currentUser.getUsername();
-    console.log("ngdoCheck show transactions");
-  }
+  // ngDoCheck(){
+  //   this.username=this.currentUser.getUsername();
+  //   console.log("ngdoCheck show transactions");
+  // }
 }
