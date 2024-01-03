@@ -3,7 +3,9 @@ import { RemoteService, userObj } from '../remote.service';
 import { FormsModule } from '@angular/forms';
 import { CurrentUserService } from '../current-user.service';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import { JsonPipe } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service'
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-user-login',
   standalone: true,
@@ -16,22 +18,30 @@ export class UserLoginComponent {
   currentUser:CurrentUserService;
   username="";
   password="";
-  constructor(remote:RemoteService,currentUser:CurrentUserService){
+  router:Router;
+  constructor(remote:RemoteService,currentUser:CurrentUserService,router:Router){
     this.remote=remote;
     this.currentUser=currentUser;
+    this.router=router;
   }
   tryLogin(){
     if(this.username==""||this.password==""){alert("Please insert both the username and password to log in")}
     else{
-      let check = this.remote.login(this.username,this.password)
-      // console.log("check "+check)
-      check.subscribe((data)=>console.log("log in subscribe "+JSON.parse(JSON.stringify(data.body))))
+      this.remote.login(this.username,this.password)
+      .subscribe({
+        next: (data)=>{
+          let user: userObj = data.body as userObj
+          this.currentUser.setCurrentUser(user)
+          let cookie = document.cookie.split(';');
+          let cookieParts = cookie[0].split("=")
+          this.router.navigate(["landing-page"])
+        },
+        error: (error: HttpErrorResponse) => {
+          alert("Access Denied")
+
+        }
+      })
     }
-    // check.subscribe((data:any)=>{
-    //   let result:userObj;
-    //   result=data;
-    //   console.log(data);
-    //   this.currentUser.setCurrentUser(result); 
-    // })
+ 
   }
 }

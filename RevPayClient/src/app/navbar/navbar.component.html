@@ -1,3 +1,20 @@
-<p>navbar works!</p>
-<nav><a routerLink="/show-transactions">Show Transactions</a></nav>
-<router-outlet />
+<ng-container *ngIf="!loggedIn">
+    <div>
+        <a id="register-user" routerLink="register-user">Register New User</a>
+        <a id="user-login" routerLink="user-login">Login</a>
+        <a id="recover-account" routerLink="recover-account">Recover Account</a>
+    </div>
+</ng-container>
+<div *ngIf="loggedIn">
+    <div>
+        <a id="show-transactions" routerLink="show-transactions">Home</a>
+        <a id="create-transaction" routerLink="create-transaction">Make a Payment</a>
+        <a id="request-payment" routerLink="request-payment">Request Payment</a>
+        <a id="card" routerLink="add-card">Add a Card</a>
+        <a id="logout" routerLink="logout">Logout</a>
+        <ng-container *ngIf="admin"><a id="admin" routerLink="admin">Admin</a></ng-container>
+    </div>
+</div>
+
+<hr>
+<router-outlet></router-outlet>

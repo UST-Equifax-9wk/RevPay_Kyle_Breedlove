@@ -1,2 +1,30 @@
-<p>show-transactions works!</p>
-<h2>Hello {{username}}</h2>
+<h1>Hello {{username}}</h1>
+<h3>Your Balance: {{balance | currency}}</h3>
+<div *ngIf="currentUser.business">
+    <button id="goToLoan" (click)="goToLoan()">View Loan Information</button>
+</div>
+<div *ngIf="!currentUser.business">
+    <div>If you would like to request a business account, enter your information below and press "Request Business Account"</div>
+    <label>Business Name:</label><br>
+    <input type="text" id="businessName" [(ngModel)]="businessName">
+    <br>
+    <label>Business Address:</label><br>
+    <input type="text" id="businessAddress" [(ngModel)]="businessAddress">
+    <br>
+    <button id="requestBusiness" (click)="requestBusiness()">Request Business Account</button>
+</div>
+<h3>Your transactions:</h3>
+<ng-container id="transactions" *ngFor="let transaction of transactionArray">
+    <ng-container *ngIf="transaction.payer.username!=transaction.payee.username">
+    <div id="userPayment"> User {{transaction.payer.username}} Payed {{transaction.cost | currency}} to {{transaction.payee.username}}  
+        on Date:{{transaction.date | date:'MM/dd/YYY'}} 
+    </div>   
+   </ng-container>
+    <ng-container *ngIf="transaction.payer.username==transaction.payee.username">
+        <div id="loanPayment">You payed {{transaction.cost | currency}} towards your loan on {{transaction.date | date:'MM/dd/YYY'}}
+
+        </div>
+    </ng-container>
+</ng-container>
+
+

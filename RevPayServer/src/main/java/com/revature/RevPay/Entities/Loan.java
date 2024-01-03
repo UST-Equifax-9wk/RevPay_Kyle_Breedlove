@@ -16,10 +16,10 @@ public class Loan {
     private Integer loanID;
 
     @Column(nullable = false)
-    private double balance;
+    private Double balance;
 
     @Column(name="interest_rate",nullable = false)
-    private double interestRate;
+    private Double interestRate;
 
     @Column(name="creation_date")
     @CreationTimestamp
@@ -27,7 +27,7 @@ public class Loan {
 
     @Column(name="minimum_payment")
     @ColumnDefault("25.00")
-    private double minimumPayment;
+    private Double minimumPayment;
 
     //day of month payment is due
     @Column(name="payment_due_day")
@@ -42,14 +42,14 @@ public class Loan {
     @CreationTimestamp
     private LocalDateTime lastPaymentDate;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="username", nullable = false)
     private User user;
 
     public Loan() {
     }
 
-    public Loan(double balance, double interestRate, LocalDateTime creationDate, double minimumPayment, LocalDateTime lastInterestUpdate, LocalDateTime lastPaymentDate, User user) {
+    public Loan(Double balance, Double interestRate, LocalDateTime creationDate, Double minimumPayment, LocalDateTime lastInterestUpdate, LocalDateTime lastPaymentDate, User user) {
         this.balance = balance;
         this.interestRate = interestRate;
         this.creationDate = creationDate;
@@ -59,7 +59,7 @@ public class Loan {
         this.user = user;
     }
 
-    public Loan(double balance, double interestRate, LocalDateTime creationDate, double minimumPayment, Integer paymentDueDay, LocalDateTime lastInterestUpdate, LocalDateTime lastPaymentDate, User user) {
+    public Loan(Double balance, Double interestRate, LocalDateTime creationDate, Double minimumPayment, Integer paymentDueDay, LocalDateTime lastInterestUpdate, LocalDateTime lastPaymentDate, User user) {
         this.balance = balance;
         this.interestRate = interestRate;
         this.creationDate = creationDate;
@@ -70,7 +70,7 @@ public class Loan {
         this.user = user;
     }
 
-    public Loan(Integer loanID, double balance, double interestRate, LocalDateTime creationDate, double minimumPayment, Integer paymentDueDay, LocalDateTime lastInterestUpdate, LocalDateTime lastPaymentDate, User user) {
+    public Loan(Integer loanID, Double balance, Double interestRate, LocalDateTime creationDate, Double minimumPayment, Integer paymentDueDay, LocalDateTime lastInterestUpdate, LocalDateTime lastPaymentDate, User user) {
         this.loanID = loanID;
         this.balance = balance;
         this.interestRate = interestRate;
@@ -90,19 +90,19 @@ public class Loan {
         this.loanID = loanID;
     }
 
-    public double getBalance() {
+    public Double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
     }
 
-    public double getInterestRate() {
+    public Double getInterestRate() {
         return interestRate;
     }
 
-    public void setInterestRate(double interestRate) {
+    public void setInterestRate(Double interestRate) {
         this.interestRate = interestRate;
     }
 
@@ -114,11 +114,11 @@ public class Loan {
         this.creationDate = creationDate;
     }
 
-    public double getMinimumPayment() {
+    public Double getMinimumPayment() {
         return minimumPayment;
     }
 
-    public void setMinimumPayment(double minimumPayment) {
+    public void setMinimumPayment(Double minimumPayment) {
         this.minimumPayment = minimumPayment;
     }
 

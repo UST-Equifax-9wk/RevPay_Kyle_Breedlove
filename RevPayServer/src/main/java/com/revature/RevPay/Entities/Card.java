@@ -22,7 +22,7 @@ public class Card {
     private String cvv;
 
     @Column(name="is_debit", nullable = false)
-    private Boolean isDebit;
+    private Boolean debit;
 
     @ManyToOne
     @JoinColumn(name="username", nullable = false)
@@ -32,12 +32,12 @@ public class Card {
     public Card() {
     }
 
-    public Card(String cardNumber, String ownerName, String expiration, String cvv, Boolean isDebit, User user) {
+    public Card(String cardNumber, String ownerName, String expiration, String cvv, Boolean debit, User user) {
         this.cardNumber = cardNumber;
         this.ownerName = ownerName;
         this.expiration = expiration;
         this.cvv = cvv;
-        this.isDebit = isDebit;
+        this.debit = debit;
         this.user = user;
     }
 
@@ -74,11 +74,11 @@ public class Card {
     }
 
     public Boolean isDebit() {
-        return isDebit;
+        return debit;
     }
 
     public void setDebit(Boolean debit) {
-        isDebit = debit;
+        this.debit = debit;
     }
 
     public User getUser() {
@@ -108,7 +108,7 @@ public class Card {
                 ", ownerName='" + ownerName + '\'' +
                 ", expiration='" + expiration + '\'' +
                 ", cvv='" + cvv + '\'' +
-                ", isDebit=" + isDebit +
+                ", isDebit=" + debit +
                 ", user=" + user +
                 '}';
     }

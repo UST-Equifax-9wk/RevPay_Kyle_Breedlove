@@ -20,11 +20,12 @@ public class UserServiceTests {
 
     @MockBean
     private UserRepository userRepository;
-
+    @MockBean
+    private EmailService emailService;
     //valid create user returns "success"
     @Test
     void givenValidUserWhenSaveUserThenReturnSuccess(){
-        User user = new User("test","1111","email","password");
+        User user = new User("test","1111","email@.","password");
         when(userRepository.getByUsername(user.getUsername())).thenReturn(null);
         when(userRepository.getByEmail(user.getEmail())).thenReturn(null);
         when(userRepository.save(user)).thenReturn(user);
@@ -37,7 +38,7 @@ public class UserServiceTests {
     //create user username already exists fails returns "username already exists"
     @Test
     void givenUserWithDuplicateUsernameWhenSaveUserThenReturnUsernameAlreadyExists(){
-        User user = new User("test","1111","email","password");
+        User user = new User("test","1111","email@.","password");
         when(userRepository.getByUsername(user.getUsername())).thenReturn(user);
         when(userRepository.getByEmail(user.getEmail())).thenReturn(null);
         when(userRepository.save(user)).thenReturn(user);
@@ -50,7 +51,7 @@ public class UserServiceTests {
     //create user no unique email fails returns "email already in use"
     @Test
     void givenUserWithDuplicateEmailWhenSaveUserThenReturnEmailAlreadyInUse(){
-        User user = new User("test","1111","email","password");
+        User user = new User("test","1111","email@.","password");
         when(userRepository.getByUsername(user.getUsername())).thenReturn(null);
         when(userRepository.getByEmail(user.getEmail())).thenReturn(user);
         when(userRepository.save(user)).thenReturn(user);
@@ -63,7 +64,7 @@ public class UserServiceTests {
     //create user invalid password should fail returns "Not a valid password"
     @Test
     void givenUserWithInvalidPasswordWhenSaveUserThenReturnNotAValidPassword(){
-        User user = new User("test","1111","email","");
+        User user = new User("test","1111","email@.","");
         when(userRepository.getByUsername(user.getUsername())).thenReturn(null);
         when(userRepository.getByEmail(user.getEmail())).thenReturn(null);
         when(userRepository.save(user)).thenReturn(user);
@@ -75,7 +76,7 @@ public class UserServiceTests {
     }
     @Test
     void givenUserWithInvalidUsernameWhenSaveUserThenReturnNotAValidUsername(){
-        User user = new User("","1111","email","password");
+        User user = new User("","1111","email@.","password");
         when(userRepository.getByUsername(user.getUsername())).thenReturn(null);
         when(userRepository.getByEmail(user.getEmail())).thenReturn(null);
         when(userRepository.save(user)).thenReturn(user);
@@ -100,7 +101,7 @@ public class UserServiceTests {
     //get user by username valid returns user
     @Test
     void givenValidUsernameWhenGetUserByUsernameReturnsUser(){
-        User user = new User("test","1111","email","password");
+        User user = new User("test","1111","email@.","password");
         when(userRepository.getByUsername(user.getUsername())).thenReturn(user);
 
         User result = userService.getUserByUsername(user.getUsername());
@@ -110,7 +111,7 @@ public class UserServiceTests {
     //get user by username invalid returns null
     @Test
     void givenNotExistingUsernameWhenGetUserByUsernameReturnsNull(){
-        User user = new User("test","1111","email","password");
+        User user = new User("test","1111","email@.","password");
         when(userRepository.getByUsername(user.getUsername())).thenReturn(null);
 
         User result = userService.getUserByUsername(user.getUsername());
@@ -120,7 +121,7 @@ public class UserServiceTests {
     //get user by email valid returns user
     @Test
     void givenValidEmailWhenGetUserByEmailReturnsUser(){
-        User user = new User("test","1111","email","password");
+        User user = new User("test","1111","email@.","password");
         when(userRepository.getByEmail(user.getEmail())).thenReturn(user);
 
         User result = userService.getUserByEmail(user.getEmail());
@@ -130,7 +131,7 @@ public class UserServiceTests {
     //get user by email invalid returns null
     @Test
     void givenNotExistingEmailWhenGetUserByEmailReturnsNull(){
-        User user = new User("test","1111","email","password");
+        User user = new User("test","1111","email@.","password");
         when(userRepository.getByEmail(user.getEmail())).thenReturn(null);
 
         User result = userService.getUserByEmail(user.getEmail());
@@ -140,8 +141,8 @@ public class UserServiceTests {
     //update user return "success"
     @Test
     void givenFullValidUserWhenUpdateUserReturnsSuccess(){
-        User user = new User("test","1111","email","password");
-        User updatedUser = new User("test","222","email","saferpassword",2000.0,false,true);
+        User user = new User("test","1111","email@.","password");
+        User updatedUser = new User("test","222","email@.","saferpassword",2000.0,false,true);
         when(userRepository.getByUsername(user.getUsername())).thenReturn(user);
         when(userRepository.getByEmail(user.getEmail())).thenReturn(user);
         when(userRepository.save(updatedUser)).thenReturn(updatedUser);
@@ -154,8 +155,8 @@ public class UserServiceTests {
     //update user no username returns "does not exist"
     @Test
     void givenNotExistingUsernameWhenUpdateUserReturnsUsernameDoesNotExist(){
-        User user = new User("test","1111","email","password");
-        User updatedUser = new User("test","222","email","saferpassword",2000.0,false,true);
+        User user = new User("test","1111","email@.","password");
+        User updatedUser = new User("test","222","email@.","saferpassword",2000.0,false,true);
         when(userRepository.getByUsername(user.getUsername())).thenReturn(null);
         when(userRepository.getByEmail(user.getEmail())).thenReturn(user);
         when(userRepository.save(updatedUser)).thenReturn(updatedUser);
@@ -168,7 +169,7 @@ public class UserServiceTests {
     //update user with not all fields full returns "Success filled missing information"
     @Test
     void givenIncompleteButValidUserWhenUpdateUserFillsUserWithExistingInfoAndReturnsSuccessFilledMissingInformation(){
-        User user = new User("test","1111","email","password");
+        User user = new User("test","1111","email@.","password");
         User updatedUser = new User("test",null,null,"saferpassword",2000.0,false,true);
         when(userRepository.getByUsername(user.getUsername())).thenReturn(user);
         when(userRepository.getByEmail(user.getEmail())).thenReturn(user);
@@ -183,7 +184,7 @@ public class UserServiceTests {
     //delete user by username return user
     @Test
     void givenValidUserNameWhenDeleteUserByUsernameThenReturnUser(){
-        User user = new User("test","1111","email","password");
+        User user = new User("test","1111","email@.","password");
         when(userRepository.getByUsername(user.getUsername())).thenReturn(user);
         when(userRepository.deleteByUsername(user.getUsername())).thenReturn(user);
 
@@ -194,7 +195,7 @@ public class UserServiceTests {
     //delete user by username no username returns null
     @Test
     void givenInvalidUserNameWhenDeleteUserByUsernameThenReturnNull(){
-        User user = new User("test","1111","email","password");
+        User user = new User("test","1111","email@.","password");
         when(userRepository.getByUsername(user.getUsername())).thenReturn(null);
         when(userRepository.deleteByUsername(user.getUsername())).thenReturn(null);
 
@@ -205,9 +206,9 @@ public class UserServiceTests {
 
     @Test
     void givenValidUserAndNewBalanceWhenUpdateBalanceReturnSuccess(){
-        User user = new User("test","1111","email","password",2000.0,false,false);
+        User user = new User("test","1111","email@.","password",2000.0,false,false);
         double newBalance = 1500;
-        User updatedUser = new User("test","1111","email","password",1500.0,false,false);
+        User updatedUser = new User("test","1111","email@.","password",1500.0,false,false);
         when(userRepository.getByUsername(user.getUsername())).thenReturn(user);
         when(userRepository.save(updatedUser)).thenReturn(updatedUser);
         String expectedAnswer = "Success";
@@ -218,9 +219,9 @@ public class UserServiceTests {
     }
     @Test
     void givenInvalidUserAndNewBalanceWhenUpdateBalanceReturnNoUserExists(){
-        User user = new User("test","1111","email","password",2000.0,false,false);
+        User user = new User("test","1111","email@.","password",2000.0,false,false);
         double newBalance = 1500;
-        User updatedUser = new User("test","1111","email","password",1500.0,false,false);
+        User updatedUser = new User("test","1111","email@.","password",1500.0,false,false);
         when(userRepository.getByUsername("")).thenReturn(null);
         when(userRepository.save(updatedUser)).thenReturn(updatedUser);
         String expectedAnswer = "No user exists";
@@ -231,11 +232,12 @@ public class UserServiceTests {
     }
     @Test
     void givenValidUserAndValidNewPasswordWhenUpdatePasswordReturnSuccess(){
-        User user = new User("test","1111","email","password",2000.0,false,false);
+        User user = new User("test","1111","email@.","password",2000.0,false,false);
         String newPassword = "abcdefg1991";
-        User updatedUser = new User("test","1111","email",newPassword,2000.0,false,false);
+        User updatedUser = new User("test","1111","email@.",newPassword,2000.0,false,false);
         when(userRepository.getByUsername(user.getUsername())).thenReturn(user);
         when(userRepository.save(updatedUser)).thenReturn(updatedUser);
+
         String expectedAnswer = "Success";
 
         String result = userService.updatePassword(user.getUsername(),newPassword);
@@ -244,9 +246,9 @@ public class UserServiceTests {
     }
     @Test
     void givenInvalidUserAndValidNewPasswordWhenUpdatePasswordReturnNoUserExists(){
-        User user = new User("test","1111","email","password",2000.0,false,false);
+        User user = new User("test","1111","email@.","password",2000.0,false,false);
         String newPassword = "abcdefg1991";
-        User updatedUser = new User("test","1111","email",newPassword,2000.0,false,false);
+        User updatedUser = new User("test","1111","email@.",newPassword,2000.0,false,false);
         when(userRepository.getByUsername("")).thenReturn(null);
         when(userRepository.save(updatedUser)).thenReturn(updatedUser);
         String expectedAnswer = "No user exists";
@@ -258,9 +260,9 @@ public class UserServiceTests {
 
     @Test
     void givenValidUserAndInvalidPasswordWhenUpdatePasswordReturnInvalidPassword(){
-        User user = new User("test","1111","email","password",2000.0,false,false);
+        User user = new User("test","1111","email@.","password",2000.0,false,false);
         String newPassword = "";
-        User updatedUser = new User("test","1111","email",newPassword,2000.0,false,false);
+        User updatedUser = new User("test","1111","email@.",newPassword,2000.0,false,false);
         when(userRepository.getByUsername(user.getUsername())).thenReturn(user);
         when(userRepository.save(updatedUser)).thenReturn(updatedUser);
         String expectedAnswer = "Invalid password";
@@ -273,7 +275,7 @@ public class UserServiceTests {
     //successfull login
     @Test
     void givenValidLoginInformationWhenLoginReturnTrue(){
-        User user = new User("test","1111","email","password",2000.0,false,false);
+        User user = new User("test","1111","email@.","password",2000.0,false,false);
         when(userRepository.getByUsername(user.getUsername())).thenReturn(user);
 
         boolean result = userService.userLogin(user.getUsername(),user.getPassword());
@@ -283,7 +285,7 @@ public class UserServiceTests {
     //login missing username
     @Test
     void givenMissingUsernameWhenLoginReturnFalse(){
-        User user = new User("test","1111","email","password",2000.0,false,false);
+        User user = new User("test","1111","email@.","password",2000.0,false,false);
         when(userRepository.getByUsername(user.getUsername())).thenReturn(user);
 
         boolean result = userService.userLogin(null,user.getPassword());
@@ -293,7 +295,7 @@ public class UserServiceTests {
     //login missing password
     @Test
     void givenMissingPasswordWhenLoginReturnFalse(){
-        User user = new User("test","1111","email","password",2000.0,false,false);
+        User user = new User("test","1111","email@.","password",2000.0,false,false);
         when(userRepository.getByUsername(user.getUsername())).thenReturn(user);
 
         boolean result = userService.userLogin(user.getUsername(),null);
@@ -303,7 +305,7 @@ public class UserServiceTests {
     //login no matching username
     @Test
     void givenNoMatchingUsernameWhenLoginReturnFalse(){
-        User user = new User("test","1111","email","password",2000.0,false,false);
+        User user = new User("test","1111","email@.","password",2000.0,false,false);
         when(userRepository.getByUsername(user.getUsername())).thenReturn(user);
         String wrongUsername = "notAUsername";
         when(userRepository.getByUsername(wrongUsername)).thenReturn(null);
@@ -315,7 +317,7 @@ public class UserServiceTests {
     //login wrong password
     @Test
     void givenIncorrectPasswordWhenLoginReturnFalse(){
-        User user = new User("test","1111","email","password",2000.0,false,false);
+        User user = new User("test","1111","email@.","password",2000.0,false,false);
         when(userRepository.getByUsername(user.getUsername())).thenReturn(user);
 
         boolean result = userService.userLogin(user.getUsername(),"wrongpassword");

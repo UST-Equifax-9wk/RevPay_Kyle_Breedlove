@@ -27,11 +27,11 @@ public class TransactionRepositoryTests {
 
     @Test
     void insertTransaction(){
-        User payee = new User("payee","111","email","pass",0.0,true,true);
+        User payee = new User("payee","111","email@.","password",0.0,true,true);
         userRepository.save(payee);
         Card card = new Card("111111111", "Kyle Breedlove", "11/25","111",true,payee);
         cardRepository.save(card);
-        User payer = new User("payer","111","a","pass",0.0,true,true);
+        User payer = new User("payer","222","a@.","password",0.0,true,true);
         userRepository.save(payer);
         Transaction transaction = new Transaction(LocalDateTime.now(),12.25,payee,payer,card);
         transactionRepository.save(transaction);
@@ -39,11 +39,11 @@ public class TransactionRepositoryTests {
     }
     @Test
     void getTransactionByID(){
-        User payee = new User("payee","111","email","pass",0.0,true,true);
+        User payee = new User("payee","111","email@.","password",0.0,true,true);
         userRepository.save(payee);
         Card card = new Card("111111111", "Kyle Breedlove", "11/25","111",true,payee);
         cardRepository.save(card);
-        User payer = new User("payer","111","a","pass",0.0,true,true);
+        User payer = new User("payer","222","a@.","password",0.0,true,true);
         userRepository.save(payer);
         Transaction transaction = new Transaction(LocalDateTime.now(),12.25,payee,payer,card);
         transactionRepository.save(transaction);
@@ -53,11 +53,11 @@ public class TransactionRepositoryTests {
     @Test
     void getValidTransactionByPayee(){
         List<Transaction> list = new ArrayList<Transaction>();
-        User payee = new User("payee","111","email","pass",0.0,true,true);
+        User payee = new User("payee","111","email@.","password",0.0,true,true);
         userRepository.save(payee);
         Card card = new Card("111111111", "Kyle Breedlove", "11/25","111",true,payee);
         cardRepository.save(card);
-        User payer = new User("payer","111","a","pass",0.0,true,true);
+        User payer = new User("payer","222","a@.","password",0.0,true,true);
         userRepository.save(payer);
         Transaction transaction = new Transaction(LocalDateTime.now(),12.25,payee,payer,card);
         transactionRepository.save(transaction);
@@ -67,11 +67,11 @@ public class TransactionRepositoryTests {
     }
     @Test
     void getInvalidTransactionByPayee(){
-        User payee = new User("payee","111","email","pass",0.0,true,true);
+        User payee = new User("payee","111","email@.","password",0.0,true,true);
         userRepository.save(payee);
         Card card = new Card("111111111", "Kyle Breedlove", "11/25","111",true,payee);
         cardRepository.save(card);
-        User payer = new User("payer","111","a","pass",0.0,true,true);
+        User payer = new User("payer","222","a@.","password",0.0,true,true);
         userRepository.save(payer);
         Transaction transaction = new Transaction(LocalDateTime.now(),12.25,payee,payer,card);
         transactionRepository.save(transaction);
@@ -81,11 +81,11 @@ public class TransactionRepositoryTests {
     @Test
     void getValidTransactionByPayer(){
         List<Transaction> list = new ArrayList<Transaction>();
-        User payee = new User("payee","111","email","pass",0.0,true,true);
+        User payee = new User("payee","111","email@.","password",0.0,true,true);
         userRepository.save(payee);
         Card card = new Card("111111111", "Kyle Breedlove", "11/25","111",true,payee);
         cardRepository.save(card);
-        User payer = new User("payer","111","a","pass",0.0,true,true);
+        User payer = new User("payer","222","a@.","password",0.0,true,true);
         userRepository.save(payer);
         Transaction transaction = new Transaction(LocalDateTime.now(),12.25,payee,payer,card);
         transactionRepository.save(transaction);
@@ -95,11 +95,11 @@ public class TransactionRepositoryTests {
     }
     @Test
     void getInvalidTransactionByPayer(){
-        User payee = new User("payee","111","email","pass",0.0,true,true);
+        User payee = new User("payee","111","email@.","password",0.0,true,true);
         userRepository.save(payee);
         Card card = new Card("111111111", "Kyle Breedlove", "11/25","111",true,payee);
         cardRepository.save(card);
-        User payer = new User("payer","111","a","pass",0.0,true,true);
+        User payer = new User("payer","222","a@.","password",0.0,true,true);
         userRepository.save(payer);
         Transaction transaction = new Transaction(LocalDateTime.now(),12.25,payee,payer,card);
         transactionRepository.save(transaction);
@@ -109,11 +109,11 @@ public class TransactionRepositoryTests {
     @Test
     void getValidTransactionByAnyInvolvement(){
         List<Transaction> list = new ArrayList<Transaction>();
-        User payee = new User("payee","111","email","pass",0.0,true,true);
+        User payee = new User("payee","111","email@.","password",0.0,true,true);
         userRepository.save(payee);
         Card card = new Card("111111111", "Kyle Breedlove", "11/25","111",true,payee);
         cardRepository.save(card);
-        User payer = new User("payer","111","a","pass",0.0,true,true);
+        User payer = new User("payer","222","a@.","password",0.0,true,true);
         userRepository.save(payer);
         Transaction transaction = new Transaction(LocalDateTime.now(),12.25,payee,payer,card);
         transactionRepository.save(transaction);
@@ -127,13 +127,13 @@ public class TransactionRepositoryTests {
     @Test
     void getInvalidTransactionByAnyInvolvement(){
         List<Transaction> list = new ArrayList<Transaction>();
-        User payee = new User("payee","111","email","pass",0.0,true,true);
+        User payee = new User("payee","111","email@.","password",0.0,true,true);
         userRepository.save(payee);
         Card card = new Card("111111111", "Kyle Breedlove", "11/25","111",true,payee);
         cardRepository.save(card);
-        User payer = new User("payer","111","a","pass",0.0,true,true);
+        User payer = new User("payer","222","a@.","password",0.0,true,true);
         userRepository.save(payer);
-        User neither = new User("neither","111","n","pass",0.0,true,true);
+        User neither = new User("neither","333","n@.","password",0.0,true,true);
         userRepository.save(neither);
         Transaction transaction = new Transaction(LocalDateTime.now(),12.25,payee,payer,card);
         transactionRepository.save(transaction);
@@ -144,11 +144,11 @@ public class TransactionRepositoryTests {
 
     @Test
     void removeTransactionByID(){
-        User payee = new User("payee","111","email","pass",0.0,true,true);
+        User payee = new User("payee","111","email@.","password",0.0,true,true);
         userRepository.save(payee);
         Card card = new Card("111111111", "Kyle Breedlove", "11/25","111",true,payee);
         cardRepository.save(card);
-        User payer = new User("payer","111","a","pass",0.0,true,true);
+        User payer = new User("payer","222","a@.","password",0.0,true,true);
         userRepository.save(payer);
         Transaction transaction = new Transaction(LocalDateTime.now(),12.25,payee,payer,card);
         transactionRepository.save(transaction);

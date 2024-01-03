@@ -4,31 +4,44 @@ import { userObj } from './remote.service';
   providedIn: 'root'
 })
 export class CurrentUserService {
-
-  constructor() { }
-  username = "temp";
-  email = "";
-  phoneNumber = "";
-  balance = 0
-  isAdmin = false;
-  isBusiness = false;
-
+  username:string;
+  email:string;
+  phoneNumber:string;
+  balance:number;
+  admin:boolean;
+  business:boolean;
+  constructor() { 
+    this.username = "none";
+    this.email = "";
+    this.phoneNumber = "";
+    this.balance = 0;
+    this.admin = false;
+    this.business = false;
+  }
   getUsername(): string{
     return this.username;
   }
 
-  setUsername(username:string){
-    this.username=username;
-    console.log("username: [" + username + " | " + this.username + "] in service");
-  }
 
   setCurrentUser(user:userObj){
     this.username=user.username;
     this.email=user.email;
     this.phoneNumber=user.phoneNumber;
     this.balance=user.balance;
-    this.isAdmin=user.isAdmin;
-    this.isBusiness=user.isBusiness;
+    this.admin=user.admin;
+    this.business=user.business;
+  }
+  getCurrentUser():userObj{
+    let user:userObj={
+      username:this.username,
+      email:this.email,
+      phoneNumber:this.phoneNumber,
+      password:"Hidden",
+      balance:this.balance,
+      admin:this.admin,
+      business:this.business
+    }
+    return user;
   }
 
 }

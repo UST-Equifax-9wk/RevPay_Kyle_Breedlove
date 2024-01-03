@@ -1,8 +1,9 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CurrentUserService } from '../current-user.service';
-import { RemoteService, Obj, userObj } from '../remote.service';
+import { RemoteService, SecurityQuestion, userObj } from '../remote.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register-user',
   standalone: true,
@@ -16,38 +17,77 @@ export class RegisterUserComponent {
   phoneNumber= ""
   password= ""
   confirmPassword= ""
-  httpClient:HttpClient;
   currentUser:CurrentUserService;
   remoteService:RemoteService;
-  objects:Obj[];
-  values="";
-  constructor(httpClient:HttpClient, currentUser:CurrentUserService, remote:RemoteService){
-    this.httpClient=httpClient;
+  router:Router;
+  securityQuestion="";
+  securityAnswer="";
+  constructor(currentUser:CurrentUserService, remote:RemoteService,router:Router){
     this.currentUser=currentUser;
     this.remoteService=remote;
-    this.objects=[];
-    this.values="";
+    this.router=router;
   }
   
   OnClickSubmit(){
-    // console.log("On click Username:" + this.username)
-    // let response = this.httpClient.get("http://localhost:8080/users/username/testUser")
-    // response.subscribe((data)=>console.log(data))
-    //let userResponse: userObj;
-   // userResponse = JSON.parse(JSON.stringify(response))
-    //console.log("on click username from response: " + userResponse.username)
-    //this.currentUser.setUsername(userResponse.username)
-    let check = this.remoteService.get()
-    let result:userObj;
-    check.subscribe((data:any)=>{result=data
-      console.log("subscribe "+result.username)
-      this.currentUser.setCurrentUser(result)
-    })
-    //console.log(result.username);
-    // this.remoteService.get().subscribe((results: Object)=>{this.objects.push(results as Obj)})
-    // for(let obj of this.objects){
-    //   this.values += obj.value+", "
-    // }
-    // console.log("values"+this.values);
+    if(this.username==""||this.password==""||this.phoneNumber==""||this.email==""||this.confirmPassword==""){
+      alert("Denied: Must Complete All Fields");
+      return;
+    }
+    if(this.checkForChars(this.phoneNumber)){
+      alert("Non numeric character inserted in phone number, please only use 0-9")
+    }
+    if(this.password!=this.confirmPassword){
+      alert("Denied: Password fields must match");
+      return;
+    }
+    if(this.password.length<8){
+      alert("Denied: Password too short");
+      return;
+    }
+    if(this.username.length<4){
+      alert("Denied: Username too short");
+      return;
+    }
+    let newUser: userObj= {
+      username: this.username,
+      phoneNumber: this.phoneNumber,
+      email: this.email,
+      balance: 0,
+      password: this.password,
+      admin: false,
+      business: false
+    }
+    this.remoteService.registerUser(newUser).subscribe(
+      {
+        next:(data) =>{
+          let security:SecurityQuestion={
+            securityQuestion:this.securityQuestion,
+            securityAnswer:this.securityAnswer,
+            user:newUser
+          }
+          this.remoteService.createSecurityQuestion(security).subscribe({
+            next:(resp)=>{
+              this.currentUser.setCurrentUser(newUser);
+              this.router.navigate(["landing-page"])
+            },
+            error: (error:HttpErrorResponse)=>{
+              if(error.status == 400) alert("Denied: Problem with security question input");
+              else if(error.status == 409) alert("Denied: This Security Question already exists for this user");
+              else alert("Denied: Unknown Error");
+            }
+          })
+          
+        },
+        error: (error:HttpErrorResponse)=>{
+          if(error.status == 400) alert("Denied: Problem with input");
+          else if(error.status == 409) alert("Denied: Used Duplicate Username, Email, or Phone Number");
+          else alert("Denied: Unknown Error");
+        }
+      }
+    )
+
   }
+  checkForChars(str: string):boolean{
+    return /\D/.test(str)
+   }
 }

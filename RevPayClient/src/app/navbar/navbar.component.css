@@ -1,0 +1,49 @@
+
+#register-user{
+    font-size: 20px;
+    text-align: center;
+    position:absolute;
+    right: 40%;
+    left: 40%;
+}
+#user-login{
+    font-size: 20px;
+}
+#recover-account{
+    font-size: 20px;
+    position:absolute;
+    right: 2%;
+}
+#show-transactions{
+    font-size: 20px;
+
+}
+#create-transaction{
+    font-size: 20px;
+    position:absolute;
+    left: 15%;
+}
+#request-payment{
+    font-size: 20px;
+    position:absolute;
+    left: 35%;
+}
+#card{
+    font-size: 20px;
+    position:absolute;
+    left: 55%;
+}
+#admin{
+    font-size: 20px;
+    position:absolute;
+    left: 75%;
+}
+#logout{
+    font-size: 20px;
+    position:absolute;
+    right:5%
+}
+div{
+    width: 100% ;
+    margin:auto;
+}

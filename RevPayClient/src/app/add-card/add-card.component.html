@@ -1,0 +1,26 @@
+<h1>Add Card:</h1>
+    <label>Card Number:</label>
+    <br>
+    <input type="number" id="cardNumber" [(ngModel)]='cardNumber'>
+    <br>
+    <label>Expiration Date:</label>
+    <br>
+    <input type="text" id="expiration" [(ngModel)]='expiration'>
+    <br>
+    <label>CVV:</label>
+    <br>
+    <input type="number" id="cvv" [(ngModel)]='cvv'>
+    <br>
+    <label>Name On Card:</label>
+    <br>
+    <input type="text" id="ownerName" [(ngModel)]='ownerName'>
+    <br><br>
+    <label>Debit or Credit?</label>
+    <br>
+    <input type="radio" id="debit" name="targetType" value="debit" [(ngModel)]="debit">
+    <label for="debit">Debit</label>
+    <br>
+    <input type="radio" id="credit" name="targetType" value="credit" [(ngModel)]="debit">
+    <label for="credit">Credit</label>
+    <br><br>
+    <button type="button" (click)="addCard()" >Submit</button>

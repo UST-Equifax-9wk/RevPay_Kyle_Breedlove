@@ -1,0 +1,12 @@
+<ng-container *ngIf="loanExists">
+    <div>Your Current Loan Balance: {{loan[0].balance | currency}}</div>
+    <div>On or before the {{loan[0].paymentDueDay}} of the month you will need to pay at least {{loan[0].minimumPayment | currency}}</div>
+    <div>You last payed on {{loan[0].lastPaymentDate | date:'MM/dd/YYY'}}</div>
+</ng-container>
+<ng-container *ngIf="!loanExists">
+    <div>You do not have a loan</div>
+    <div>If you would like to request a loan, insert the amount below and click "Request"</div>
+    <input type="text" id="loanAmount" [(ngModel)]="loanAmount">
+    <br>
+    <button type="submit" id="requestLoan" (click)="requestLoan()">Request</button>
+</ng-container>

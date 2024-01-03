@@ -1,6 +1,5 @@
-<p>register-user works!</p>
 
-    <p>Register User</p>
+    <h1>Register User</h1>
     <label>Username:</label>
     <br>
     <input type="text" id="username" [(ngModel)]='username'>
@@ -11,7 +10,7 @@
     <br>
     <label>Phone Number:</label>
     <br>
-    <input type="text" id="phoneNumber" [(ngModel)]='phoneNumber'>
+    <input type="number" id="phoneNumber" [(ngModel)]='phoneNumber'>
     <br>
     <label>Password:</label>
     <br>
@@ -21,5 +20,16 @@
     <br>
     <input type="text" id="confirmPassword" [(ngModel)]='confirmPassword'>
     <br>
+    <br>
+    <label>Create A Security Question:</label>
+    <br>
+    <label>Question:</label>
+    <br>
+    <input type="text" id="securityQuestion" [(ngModel)]='securityQuestion'>
+    <br>
+    <label>Answer:</label>
+    <br>
+    <input type="text" id="securityAnswer" [(ngModel)]='securityAnswer'>
+    <br><br>
     <button type="button" (click)="OnClickSubmit()" >Submit</button>
     

@@ -1,0 +1,62 @@
+<h1>Hello {{username}}</h1>
+
+<form>
+<input type="radio" id="loanPayment" name="targetType" value="loan" [(ngModel)]="targetType">
+<label for="loanPayment">Pay on Loan</label>
+<br>
+<input type="radio" id="username" name="targetType" value="user" [(ngModel)]="targetType">
+<label for="username">Pay By Username</label>
+<br>
+<input type="radio" id="email" name="targetType" value="email" [(ngModel)]="targetType">
+<label for="email">Pay By Email</label>
+<br>
+<input type="radio" id="phoneNumber" name="targetType" value="phone" [(ngModel)]="targetType">
+<label for="phoneNumber">Pay By Phone Number</label>
+</form>
+
+
+
+<ng-container *ngIf="targetType=='user'">
+    <br>
+    <label>Username to Pay to:</label>
+    <br>
+    <input type="text" id="username" [(ngModel)]='target'>
+</ng-container> 
+<ng-container *ngIf="targetType=='email'">
+    <br>
+    <label>Email to Pay to:</label>
+    <br>
+    <input type="text" id="email" [(ngModel)]='target'>
+</ng-container> 
+<ng-container *ngIf="targetType=='phone'">
+    <br>
+    <label>Phone Number to Pay to:</label>
+    <br>
+    <input type="text" id="phone" [(ngModel)]='target'>
+</ng-container> 
+<ng-container *ngIf="targetType!=''">
+    <br>
+    <br>
+    <label>How much are you paying?</label>
+    <br>
+    <input type="number" id="total" [(ngModel)]='total'>
+    <br>
+    <br>
+    <label>How would you like to pay?</label>
+    <br>
+    <input type="radio" id="balance" name="paymentType" value="balance" [(ngModel)]="paymentType">
+    <label for="balance">Account Balance</label>
+    <br>
+    <input type="radio" id="card" name="paymentType" value="card" [(ngModel)]="paymentType">
+    <label for="card">Pay with Card</label>
+    <ng-container *ngIf="paymentType=='card'">
+        <br>
+        <br>
+        <label>Which card would you like to use?</label>
+        <select name="cardNumber" id="cardNumber" placeholder="Select Card" [(ngModel)]="selectedCard">
+            <option *ngFor="let card of cardArray">{{card.cardNumber}}</option>
+        </select>
+    </ng-container>
+    <br><br>
+    <button type="submit" (click)="createTransaction()">Submit</button>
+</ng-container>

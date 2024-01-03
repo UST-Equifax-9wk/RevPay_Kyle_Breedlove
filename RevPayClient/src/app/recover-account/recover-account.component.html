@@ -1,0 +1,23 @@
+<label>Please enter your username:</label>
+<br>
+<input type="text" id="username" [(ngModel)]="username"><br>
+
+<button type="submit" (click)="retrieveUser()">Continue</button>
+<br>
+
+    <ng-container *ngFor="let question of securityQuestions; index as index">
+        <ng-container *ngIf="index==cycleIndex">
+            <label>{{question.securityQuestion}}</label><br>
+            <input type="text" id="answer" [(ngModel)]="answer"><br>
+            <button type="submit" (click)="submitAnswer()">Submit Answer</button><br>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="correct">
+        <label>New Password:</label><br>
+        <input type="text" id="password" [(ngModel)]="password"><br>
+        <label>Confirm Password:</label><br>
+        <input type="text" id="confirmPassword" [(ngModel)]="confirmPassword"><br>
+        <button type="submit" (click)="changePassword()">Change Password</button>
+
+    </ng-container>
+    

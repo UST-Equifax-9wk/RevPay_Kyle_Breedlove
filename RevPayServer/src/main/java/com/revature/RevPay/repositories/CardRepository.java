@@ -12,6 +12,6 @@ public interface CardRepository extends JpaRepository<Card,String> {
 
     public Card getByCardNumber(String cardNumber);
 
-    public List<Card> getCardsByUser(User username);
+    public List<Card> getCardsByUser(User user);
     public Card deleteByCardNumber(String cardNumber);
 }

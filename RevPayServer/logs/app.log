@@ -1,0 +1,59 @@
+2024-01-03 14:20:24.307  INFO 18737 --- [main] com.revature.RevPay.RevPayApplication    : Starting RevPayApplication using Java 17.0.9 with PID 24424 (C:\Users\kyle_\Desktop\Revature\RevPay_Kyle_Breedlove\RevPayServer\target\classes started by kyle_ in C:\Users\kyle_\Desktop\Revature\RevPay_Kyle_Breedlove\RevPayServer)
+2024-01-03 14:20:24.323  INFO 18737 --- [main] com.revature.RevPay.RevPayApplication    : No active profile set, falling back to 1 default profile: "default"
+2024-01-03 14:20:25.566  INFO 18737 --- [main] y.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-01-03 14:20:25.707  INFO 18737 --- [main] y.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 120 ms. Found 5 JPA repository interfaces.
+2024-01-03 14:20:27.256  INFO 18737 --- [main] boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port 8080 (http)
+2024-01-03 14:20:27.306  INFO 18737 --- [main] g.apache.coyote.http11.Http11NioProtocol : Initializing ProtocolHandler ["http-nio-8080"]
+2024-01-03 14:20:27.321  INFO 18737 --- [main] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2024-01-03 14:20:27.323  INFO 18737 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-01-03 14:20:27.623  INFO 18737 --- [main] e.ContainerBase.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext
+2024-01-03 14:20:27.626  INFO 18737 --- [main] ntext.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3225 ms
+2024-01-03 14:20:28.052  INFO 18737 --- [main] rg.hibernate.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-01-03 14:20:28.362  INFO 18737 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-01-03 14:20:28.532  INFO 18737 --- [main] te.cache.internal.RegionFactoryInitiator : HHH000026: Second-level cache disabled
+2024-01-03 14:20:29.315  INFO 18737 --- [main] ersistenceunit.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-01-03 14:20:29.405  INFO 18737 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-01-03 14:20:30.709  INFO 18737 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@693f2c89
+2024-01-03 14:20:30.713  INFO 18737 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-01-03 14:20:33.668  INFO 18737 --- [main] a.platform.internal.JtaPlatformInitiator : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-01-03 14:20:35.275  INFO 18737 --- [main] a.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-01-03 14:20:37.344  INFO 18737 --- [main] pa.repository.query.QueryEnhancerFactory : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-01-03 14:20:37.703  WARN 18737 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-01-03 14:20:38.530  INFO 18737 --- [main] g.apache.coyote.http11.Http11NioProtocol : Starting ProtocolHandler ["http-nio-8080"]
+2024-01-03 14:20:38.590  INFO 18737 --- [main] boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port 8080 (http) with context path ''
+2024-01-03 14:20:38.610  INFO 18737 --- [main] com.revature.RevPay.RevPayApplication    : Started RevPayApplication in 14.911 seconds (process running for 16.382)
+2024-01-03 14:20:38.618  INFO 18737 --- [main] fileLogger                               : info application start
+2024-01-03 14:20:38.619  WARN 18737 --- [main] fileLogger                               : warn application start
+2024-01-03 14:20:38.619 FATAL 18737 --- [main] fileLogger                               : fatal application start
+2024-01-03 14:20:38.620 ERROR 18737 --- [main] fileLogger                               : error application start
+2024-01-03 14:20:38.620  INFO 18737 --- [main] fileLogger                               : info log
+2024-01-03 14:20:38.620  WARN 18737 --- [main] fileLogger                               : warn log
+2024-01-03 14:20:38.621 FATAL 18737 --- [main] fileLogger                               : fatal log
+2024-01-03 14:20:38.621 ERROR 18737 --- [main] fileLogger                               : error log
+2024-01-03 14:32:23.165  INFO 18737 --- [SpringApplicationShutdownHook] a.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-01-03 14:32:23.170  INFO 18737 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-01-03 14:32:23.809  INFO 18737 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2024-01-03 14:32:36.484  INFO 18737 --- [main] com.revature.RevPay.RevPayApplication    : Starting RevPayApplication using Java 17.0.9 with PID 32012 (C:\Users\kyle_\Desktop\Revature\RevPay_Kyle_Breedlove\RevPayServer\target\classes started by kyle_ in C:\Users\kyle_\Desktop\Revature\RevPay_Kyle_Breedlove\RevPayServer)
+2024-01-03 14:32:36.520  INFO 18737 --- [main] com.revature.RevPay.RevPayApplication    : No active profile set, falling back to 1 default profile: "default"
+2024-01-03 14:32:38.741  INFO 18737 --- [main] y.config.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-01-03 14:32:38.993  INFO 18737 --- [main] y.config.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 230 ms. Found 5 JPA repository interfaces.
+2024-01-03 14:32:40.458  INFO 18737 --- [main] boot.web.embedded.tomcat.TomcatWebServer : Tomcat initialized with port 8080 (http)
+2024-01-03 14:32:40.481  INFO 18737 --- [main] g.apache.coyote.http11.Http11NioProtocol : Initializing ProtocolHandler ["http-nio-8080"]
+2024-01-03 14:32:40.488  INFO 18737 --- [main] org.apache.catalina.core.StandardService : Starting service [Tomcat]
+2024-01-03 14:32:40.489  INFO 18737 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/10.1.16]
+2024-01-03 14:32:40.652  INFO 18737 --- [main] e.ContainerBase.[Tomcat].[localhost].[/] : Initializing Spring embedded WebApplicationContext
+2024-01-03 14:32:40.656  INFO 18737 --- [main] ntext.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3983 ms
+2024-01-03 14:32:41.102  INFO 18737 --- [main] rg.hibernate.jpa.internal.util.LogHelper : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-01-03 14:32:41.261  INFO 18737 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.3.1.Final
+2024-01-03 14:32:41.367  INFO 18737 --- [main] te.cache.internal.RegionFactoryInitiator : HHH000026: Second-level cache disabled
+2024-01-03 14:32:42.044  INFO 18737 --- [main] ersistenceunit.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-01-03 14:32:42.114  INFO 18737 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-01-03 14:32:43.393  INFO 18737 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@31b6b0c7
+2024-01-03 14:32:43.399  INFO 18737 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-01-03 14:32:46.489  INFO 18737 --- [main] a.platform.internal.JtaPlatformInitiator : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-01-03 14:32:48.099  INFO 18737 --- [main] a.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-01-03 14:32:49.760  INFO 18737 --- [main] pa.repository.query.QueryEnhancerFactory : Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-01-03 14:32:50.057  WARN 18737 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-01-03 14:32:50.859  INFO 18737 --- [main] g.apache.coyote.http11.Http11NioProtocol : Starting ProtocolHandler ["http-nio-8080"]
+2024-01-03 14:32:50.900  INFO 18737 --- [main] boot.web.embedded.tomcat.TomcatWebServer : Tomcat started on port 8080 (http) with context path ''
+2024-01-03 14:32:50.917  INFO 18737 --- [main] com.revature.RevPay.RevPayApplication    : Started RevPayApplication in 15.556 seconds (process running for 18.203)

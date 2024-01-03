@@ -5,23 +5,35 @@ import com.revature.RevPay.repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.mindrot.jbcrypt.BCrypt;
+
+import static com.revature.RevPay.RevPayApplication.logger;
+
 
 @Service
 @Transactional(Transactional.TxType.REQUIRED)
 public class UserService {
     private UserRepository userRepository;
+    private EmailService emailService;
+
     @Autowired
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository, EmailService emailService){
         this.userRepository=userRepository;
+        this.emailService=emailService;
     }
 
     public String createUser(User user){
         if(user.getUsername()==null || user.getUsername().length()<User.getMinimumUsernameLength()) return "Not a valid username";
-        if(user.getEmail()==null) return "Not a valid email";
+        if(user.getEmail()==null || !(user.getEmail().contains("@") && user.getEmail().contains("."))) return "Not a valid email";
+        if(user.getPhoneNumber()==null) return "Not a valid phone number";
         if(user.getPassword()==null || user.getPassword().length()<User.getMinimumPasswordLength()) return "Not a valid password";
         if(getUserByUsername(user.getUsername())!=null) return "Username already exists";
         if(getUserByEmail(user.getEmail())!=null)return "Email already in use";
+        if(getUserByPhone(user.getPhoneNumber())!=null)return "Phone number already in use";
+        user.setPassword(hash(user.getPassword()));
         userRepository.save(user);
+        emailService.createAccountEmail(user);
+        logger.info("NEW USER CREATED - "+user.getUsername());
         return"Success";
     }
 
@@ -29,7 +41,9 @@ public class UserService {
         return userRepository.getByUsername(username);
 
     }
-    //TODO make phone number unique
+    public User getUserByPhone(String phone){
+        return userRepository.getByPhoneNumber(phone);
+    }
     public User getUserByEmail(String email){
         return userRepository.getByEmail(email);
     }
@@ -76,7 +90,7 @@ public class UserService {
             filled=true;
 
         }
-
+        newValues.setPassword(hash(newValues.getPassword()));
         userRepository.save(newValues);
         if(filled)return "Success filled missing information";
         return "Success";
@@ -93,6 +107,7 @@ public class UserService {
         if(user==null)return "No user exists";
         user.setBalance(newBalance);
         userRepository.save(user);
+        logger.info("BALANCE UPDATE - "+username+" balance set to "+newBalance);
         return "Success";
     }
 
@@ -100,8 +115,11 @@ public class UserService {
         if(newPassword.length()<User.getMinimumPasswordLength())return"Invalid password";
         User user =getUserByUsername(username);
         if(user == null)return"No user exists";
-        user.setPassword(newPassword);
+        String newHash = hash(newPassword);
+        user.setPassword(newHash);
         userRepository.save(user);
+        emailService.changePasswordEmail(user);
+        logger.info("UPDATED PASSWORD from user: "+username);
         return "Success";
     }
 
@@ -109,7 +127,15 @@ public class UserService {
         if(username==null || password==null) return false;
         User user = getUserByUsername(username);
         if(user==null)return false;
-        return user.getPassword().equals(password);
+        boolean res= BCrypt.checkpw(password,user.getPassword());
+        if(res)logger.info("USER LOGGED IN "+username);
+        return res;
     }
+
+    public String hash(String text){
+        String salt = BCrypt.gensalt(12);
+        return BCrypt.hashpw(text,salt);
+    }
+
 
 }

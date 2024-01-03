@@ -51,14 +51,12 @@ public class LoanRepositoryTests {
     }
     @Test
     void getValidLoanByUser(){
-        List<Loan> list = new ArrayList<>();
         User user = new User("kylebreedlove","111","email","pass",0.0,true,true);
         userRepository.save(user);
         Loan loan = new Loan(2037.24, 0.07, LocalDateTime.now(),25.00,LocalDateTime.now(),LocalDateTime.now(),user);
         loanRepository.save(loan);
-        list.add(loan);
-        List<Loan> result = loanRepository.getByUser(user);
-        Assertions.assertEquals(list,result);
+        Loan result = loanRepository.getByUser(user);
+        Assertions.assertEquals(loan,result);
     }
     @Test
     void getInvalidLoanByUser(){
@@ -67,8 +65,8 @@ public class LoanRepositoryTests {
         Loan loan = new Loan(2037.24, 0.07, LocalDateTime.now(),25.00,LocalDateTime.now(),LocalDateTime.now(),user);
         loanRepository.save(loan);
         User invalid = new User("ky","111","a","pass",0.0,true,true);
-        List<Loan> result = loanRepository.getByUser(invalid);
-        Assertions.assertTrue(result.isEmpty());
+        Loan result = loanRepository.getByUser(invalid);
+        Assertions.assertNull(result);
     }
     @Test
     void updateLoan(){
@@ -76,7 +74,7 @@ public class LoanRepositoryTests {
         userRepository.save(user);
         Loan loan = new Loan(2037.24, 0.07, LocalDateTime.now(),25.00,LocalDateTime.now(),LocalDateTime.now(),user);
         loanRepository.save(loan);
-        Loan update = new Loan(loan.getLoanID(),1485,0.07,LocalDateTime.now(),25.00, 1, LocalDateTime.now(),LocalDateTime.now(),user);
+        Loan update = new Loan(loan.getLoanID(),1485.0,0.07,LocalDateTime.now(),25.00, 1, LocalDateTime.now(),LocalDateTime.now(),user);
         loanRepository.save(update);
         Assertions.assertEquals(update,entityManager.find(Loan.class,loan.getLoanID()));
     }

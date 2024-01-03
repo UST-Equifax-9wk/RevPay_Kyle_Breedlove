@@ -1,13 +1,8 @@
 package com.revature.RevPay.Entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Check;
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
-import java.util.List;
 import java.util.Objects;
 
 @Entity(name="users")
@@ -18,7 +13,7 @@ public class User {
     @Column
     private String username;
 
-    @Column(name="phone_number")
+    @Column(name="phone_number", unique = true,nullable = false)
     private String phoneNumber;
 
     @Column(unique = true, nullable = false)
@@ -28,16 +23,16 @@ public class User {
     private String password;
 
     @Column
-    @ColumnDefault("0")
+    @ColumnDefault("0.00")
     private Double balance;
 
-    @Column(name="is_admin")
+    @Column(name="admin")
     @ColumnDefault("false")
-    private Boolean isAdmin;
+    private Boolean admin;
 
-    @Column(name="is_Business")
+    @Column(name="business")
     @ColumnDefault("false")
-    private Boolean isBusiness;
+    private Boolean business;
 
     //TODO do I need this?
 //    @OneToMany(mappedBy = "user")
@@ -51,13 +46,19 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
+//        this.balance = 0.0;
+//        this.isAdmin = false;
+//        this.isBusiness = false;
     }
 
-    public User(String username, String phoneNumber, String email, String password, Double balance, Boolean isAdmin, Boolean isBusiness) {
-        this(username, phoneNumber, email, password);
+    public User(String username, String phoneNumber, String email, String password, Double balance, Boolean admin, Boolean business) {
+        this.username = username;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.password = password;
         this.balance = balance;
-        this.isAdmin = isAdmin;
-        this.isBusiness = isBusiness;
+        this.admin = admin;
+        this.business = business;
     }
     public static int getMinimumPasswordLength(){
         return minimumPasswordLength;
@@ -99,19 +100,19 @@ public class User {
     }
 
     public Boolean isAdmin() {
-        return isAdmin;
+        return admin;
     }
 
     public void setAdmin(Boolean admin) {
-        isAdmin = admin;
+        this.admin = admin;
     }
 
     public Boolean isBusiness() {
-        return isBusiness;
+        return business;
     }
 
     public void setBusiness(Boolean business) {
-        isBusiness = business;
+        this.business = business;
     }
 
     public Double getBalance() {
@@ -142,8 +143,8 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", balance=" + balance +
-                ", isAdmin=" + isAdmin +
-                ", isBusiness=" + isBusiness +
+                ", isAdmin=" + admin +
+                ", isBusiness=" + business +
                 '}';
     }
 }
